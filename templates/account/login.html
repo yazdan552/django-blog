@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    ورود به حساب کاربری
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center mb-0">ورود به سایت</h3>
+                </div>
+
+                <div class="card-body">
+                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+
+                        {{ form|crispy }}
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                        {% endif %}
+
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary" type="submit">ورود</button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <a href="{% url 'account_reset_password' %}" class="text-muted">
+                                رمز عبور خود را فراموش کرده‌اید؟
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer text-center">
+                    <small>
+                        حساب کاربری ندارید؟
+                        <a href="{% url 'account_signup' %}">ثبت نام کنید</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

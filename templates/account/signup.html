@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    ثبت نام در سایت
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="text-center mb-0">ثبت نام</h3>
+                </div>
+
+                <div class="card-body">
+                    <form class="signup" method="POST" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+
+                        {{ form|crispy }}
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                        {% endif %}
+
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-success" type="submit">ثبت نام</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer text-center">
+                    <small>
+                        قبلاً ثبت نام کرده‌اید؟
+                        <a href="{% url 'account_login' %}">وارد شوید</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

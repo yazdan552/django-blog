@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if form.instance.pk %}ویرایش مقاله{% else %}نوشتن مقاله جدید{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center mb-0">
+                        {% if form.instance.pk %}ویرایش مقاله{% else %}نوشتن مقاله جدید{% endif %}
+                    </h3>
+                </div>
+
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-success" type="submit">
+                                {% if form.instance.pk %}💾 ذخیره تغییرات{% else %}✨ انتشار مقاله{% endif %}
+                            </button>
+                            <a href="{% url 'index' %}" class="btn btn-secondary">انصراف</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">💡 نکات نگارش مقاله حرفه‌ای</h5>
+                    <ul class="small text-muted">
+                        <li>عنوان جذاب و کوتاه (حداکثر 60 کاراکتر)</li>
+                        <li>متن رو به بخش‌های کوچک با زیرعنوان تقسیم کنید</li>
+                        <li>از تصاویر مرتبط و با کیفیت استفاده کنید</li>
+                        <li>مطالب رو با مثال عملی توضیح بدید</li>
+                        <li>از تگ‌های مناسب برای سئو استفاده کنید</li>
+                    </ul>
+                    <hr>
+                    <div class="alert alert-info small mb-0">
+                        🔍 برای better SEO، حتماً از کلمات کلیدی در عنوان و متن استفاده کنید.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
