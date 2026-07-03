@@ -25,23 +25,7 @@ A complete blog website built with Django.
 - django-taggit
 - crispy-forms
 
-## Screenshots
 
-### Home Page
-
-![Home Page](screenshots/home.png)
-
-### Article Detail
-
-![Article Detail](screenshots/detail.png)
-
-### User Profile
-
-![User Profile](screenshots/profile.png)
-
-### Admin Panel
-
-![Admin Panel](screenshots/admin.png)
 
 ## Installation
 
